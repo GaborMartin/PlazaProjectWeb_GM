@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DatabasePlazaImpl extends AbstractDao implements PlazaDao  {
 
-    DatabasePlazaImpl(Connection connection) {
+    public DatabasePlazaImpl(Connection connection) {
         super(connection);
     }
 
