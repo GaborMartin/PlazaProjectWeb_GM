@@ -6,7 +6,6 @@ import com.codecool.web.model.Shop;
 import com.codecool.web.service.ShopService;
 import com.codecool.web.service.exception.ServiceException;
 
-import javax.xml.ws.Service;
 import java.sql.SQLException;
 import java.util.List;
 
