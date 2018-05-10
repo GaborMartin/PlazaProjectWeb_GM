@@ -10,6 +10,8 @@
         <c:url value="/login.js" var="loginScriptUrl"/>
         <c:url value="/profile.js" var="profileScriptUrl"/>
         <c:url value="/plazas.js" var="plazasScriptUrl"/>
+        <c:url value="/shops.js" var="shopsScriptUrl"/>
+        <c:url value="/back-to-plazas.js" var="backToPlazasScriptUrl"/>
         <c:url value="/back-to-profile.js" var="backToProfileScriptUrl"/>
         <c:url value="/logout.js" var="logoutScriptUrl"/>
         <link rel="stylesheet" type="text/css" href="${styleUrl}">
@@ -17,9 +19,11 @@
         <script src="${loginScriptUrl}"></script>
         <script src="${profileScriptUrl}"></script>
         <script src="${plazasScriptUrl}"></script>
+        <script src="${shopsScriptUrl}"></script>
+        <script src="${backToPlazasScriptUrl}"></script>
         <script src="${backToProfileScriptUrl}"></script>
         <script src="${logoutScriptUrl}"></script>
-        <title>App</title>
+        <title>Plaza Web</title>
     </head>
 <body>
 
@@ -40,9 +44,14 @@
 
 <div id="plazas-content" class="hidden content"></div>
 
+<div id ="shops-content" class="hidden content"></div>
+
+<div id ="back-to-plazas-content" class="hidden content">
+    <button onclick="onBackToPlazasClicked();">Back to plazas</button>
+</div>
 
 <div id="back-to-profile-content" class="hidden content">
-    <button onclick="onBackToProfileClicked();">Back to profile</button>
+    <br><button onclick="onBackToProfileClicked();">Back to profile</button>
 </div>
 <div id="logout-content" class="hidden content">
     <button id="logout-button">Logout</button>
