@@ -19,6 +19,9 @@ function onPlazasResponse() {
         const spanEl = document.createElement('span');
         spanEl.setAttribute('id', plaza.id);
         spanEl.textContent = plaza.name;
+        spanEl.dataset.plazaId = plaza.id;
+
+        spanEl.addEventListener('click', onPlazaClicked);
 
         const liEl = document.createElement('li');
         liEl.append(spanEl);
