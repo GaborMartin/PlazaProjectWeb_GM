@@ -44,7 +44,7 @@ public class SimpleProductService implements ProductService {
     @Override
     public List<Product> getAllByShopId(int shopId) throws ServiceException {
         try {
-            List<Product> products = productDao.getAllByShopId(shopId);
+            List<Product> products = productDao.getAllProductsByShopId(shopId);
             if (products.size() == 0) {
                 throw new ServiceException("There's no any product for this shop!");
             }
