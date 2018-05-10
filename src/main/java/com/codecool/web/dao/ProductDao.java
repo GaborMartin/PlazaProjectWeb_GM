@@ -10,6 +10,6 @@ public interface ProductDao {
 
     public List<Product> getAll() throws SQLException;
     public Product getProductById(int id) throws SQLException;
-    public List<Product> getAllByShopId(int shopId) throws SQLException;
+    public List<Product> getAllProductsByShopId(int shopId) throws SQLException;
     public Product fetchProduct(ResultSet resultSet) throws SQLException;
 }
