@@ -12,7 +12,10 @@
         <c:url value="/plazas.js" var="plazasScriptUrl"/>
         <c:url value="/shops.js" var="shopsScriptUrl"/>
         <c:url value="/back-to-plazas.js" var="backToPlazasScriptUrl"/>
-        <c:url value="/back-to-profile.js" var="backToProfileScriptUrl"/>
+        <c:url value="/products.js" var="productsScriptUrl"/>
+        <c:url value="/product.js" var="productScriptUrl"/>
+        <c:url value="/back-to-shops.js" var="backToShopsScriptUrl"/>
+        <c:url value="/back-to-products.js" var="backToProductsScriptUrl"/>
         <c:url value="/logout.js" var="logoutScriptUrl"/>
         <link rel="stylesheet" type="text/css" href="${styleUrl}">
         <script src="${indexScriptUrl}"></script>
@@ -21,7 +24,10 @@
         <script src="${plazasScriptUrl}"></script>
         <script src="${shopsScriptUrl}"></script>
         <script src="${backToPlazasScriptUrl}"></script>
-        <script src="${backToProfileScriptUrl}"></script>
+        <script src="${productsScriptUrl}"></script>
+        <script src="${productScriptUrl}"></script>
+        <script src="${backToShopsScriptUrl}"></script>
+        <script src="${backToProductsScriptUrl}"></script>
         <script src="${logoutScriptUrl}"></script>
         <title>Plaza Web</title>
     </head>
@@ -46,9 +52,27 @@
 
 <div id ="shops-content" class="hidden content"></div>
 
+<div id="products-content" class="hidden content"></div>
+
+<div id="product-content" class="hidden content">
+    <p>Id: <span id="product-id"></span></p>
+    <p>Name: <span id="product-name"></span></p>
+    <p>Barcode: <span id="product-barcode"></span></p>
+    <p>Manufacturer: <span id="product-manufacturer"></span></p>
+    <p>Price: <span id="product-price"></span></p>
+</div>
+
+<div id="back-to-products-content" class="hidden content">
+    <button onclick="onBackToProductsClicked();">Back to products</button>
+</div><br>
+
+<div id="back-to-shops-content" class="hidden content">
+    <button onclick="onBackToShopsClicked();">Back to shops</button>
+</div><br>
+
 <div id ="back-to-plazas-content" class="hidden content">
     <button onclick="onBackToPlazasClicked();">Back to plazas</button>
-</div>
+</div><br>
 
 <div id="back-to-profile-content" class="hidden content">
     <br><button onclick="onBackToProfileClicked();">Back to profile</button>

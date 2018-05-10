@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DatabaseProductImpl extends AbstractDao implements ProductDao {
 
-    DatabaseProductImpl(Connection connection) {
+    public DatabaseProductImpl(Connection connection) {
         super(connection);
     }
 
@@ -52,7 +52,7 @@ public class DatabaseProductImpl extends AbstractDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getAllByShopId(int shopId) throws SQLException {
+    public List<Product> getAllProductsByShopId(int shopId) throws SQLException {
         List<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM products WHERE shop_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {

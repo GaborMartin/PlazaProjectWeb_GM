@@ -18,8 +18,9 @@ function onShopsResponse() {
         const spanEl = document.createElement('span');
         spanEl.setAttribute('id', shop.id);
         spanEl.textContent = shop.name;
+        spanEl.dataset.shopId = shop.id;
 
-        //spanEl.addEventListener('click', onShopClicked);
+        spanEl.addEventListener('click', onShopClicked);
 
         const liEl = document.createElement('li');
         liEl.append(spanEl);
