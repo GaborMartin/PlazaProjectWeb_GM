@@ -6,6 +6,8 @@ import com.codecool.web.model.Plaza;
 import com.codecool.web.service.PlazaService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimplePlazaService;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +29,24 @@ public class PlazasServlet extends AbstractServlet {
             List<Plaza> plazas = plazaService.getAll();
 
             sendMessage(resp, HttpServletResponse.SC_OK, plazas);
+        } catch (SQLException e) {
+            handleSqlError(resp, e);
+        } catch (ServiceException e) {
+            sendMessage(resp, HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try (Connection connection = getConnection(req.getServletContext())) {
+            PlazaDao plazaDao = new DatabasePlazaImpl(connection);
+            PlazaService plazaService = new SimplePlazaService(plazaDao);
+
+            String plazaName = req.getParameter("name");
+
+            Plaza newPlaza = plazaService.addNewPlaza(plazaName);
+
+            sendMessage(resp,HttpServletResponse.SC_OK, newPlaza);
         } catch (SQLException e) {
             handleSqlError(resp, e);
         } catch (ServiceException e) {

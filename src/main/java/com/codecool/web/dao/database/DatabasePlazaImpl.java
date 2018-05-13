@@ -2,6 +2,7 @@ package com.codecool.web.dao.database;
 
 import com.codecool.web.dao.PlazaDao;
 import com.codecool.web.model.Plaza;
+import com.codecool.web.service.exception.ServiceException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -41,8 +42,8 @@ public class DatabasePlazaImpl extends AbstractDao implements PlazaDao  {
     }
 
     public Plaza addPlaza(String name) throws SQLException {
-        if (name.equals("")) {
-            throw new IllegalArgumentException();
+        if (name == null || name.equals("")) {
+            throw new IllegalArgumentException("Name cannot be empty!");
         }
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
@@ -52,6 +53,44 @@ public class DatabasePlazaImpl extends AbstractDao implements PlazaDao  {
             executeInsert(statement);
             int id = fetchGeneratedId(statement);
             return new Plaza(id, name);
+        } catch (SQLException ex) {
+            connection.rollback();
+            throw ex;
+        } finally {
+            connection.setAutoCommit(autoCommit);
+        }
+    }
+
+    @Override
+    public void updatePlazaById(int id, String newName) throws SQLException {
+        if (newName == null || newName.equals("")) {
+            throw new IllegalArgumentException("Name cannot be empty!");
+        }
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "UPDATE public.plazas SET name = ? WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, newName);
+            statement.setInt(2, id);
+            executeInsert(statement);
+            connection.commit();
+        } catch (SQLException ex) {
+            connection.rollback();
+            throw ex;
+        } finally {
+            connection.setAutoCommit(autoCommit);
+        }
+    }
+
+    @Override
+    public void deletePlazaById(int id) throws SQLException {
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "DELETE FROM public.plazas WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setInt(1, id);
+            executeInsert(statement);
+            connection.commit();
         } catch (SQLException ex) {
             connection.rollback();
             throw ex;
