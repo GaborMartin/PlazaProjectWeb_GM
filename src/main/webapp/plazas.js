@@ -53,16 +53,41 @@ function createPlazasList(plazas) {
     return ulEl;
 }
 
+function onPlazaRemoveResponse() {
+    removeAllChildren(plazasContentDivEl);
+    onPlazasLoad();
+}
+
+function onDeleteButtonClicked() {
+    clearMessages();
+
+    const plazaId = this.dataset.plazaId;
+
+    const params = new URLSearchParams();
+    params.append('id', plazaId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onPlazaRemoveResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('DELETE', 'protected/plazas?' + params.toString());
+    xhr.send();
+}
+
 function appendPlaza(plaza) {
     const spanEl = document.createElement('span');
     spanEl.setAttribute('id', plaza.id);
     spanEl.textContent = plaza.name;
     spanEl.dataset.plazaId = plaza.id;
+    const deleteButton = document.createElement('button');
+    deleteButton.dataset.plazaId = plaza.id;
+    deleteButton.textContent = 'Delete!';
 
     spanEl.addEventListener('click', onPlazaClicked);
+    deleteButton.addEventListener('dblclick', onDeleteButtonClicked);
 
     const liEl = document.createElement('li');
     liEl.append(spanEl);
+    liEl.append(deleteButton);
     ulEl.append(liEl);
 }
 
