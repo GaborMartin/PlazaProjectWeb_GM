@@ -2,7 +2,8 @@ function onLogoutResponse() {
     if (this.status === OK) {
         setUnauthorized();
         clearMessages();
-        showContents(['login-content'])
+        showContents(['login-content']);
+        removeAllChildren(plazasContentDivEl);
     } else {
         onOtherResponse(logoutContentDivEl, this);
     }
