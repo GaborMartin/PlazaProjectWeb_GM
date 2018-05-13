@@ -48,7 +48,14 @@
     <p>Password: <span id="user-password"></span></p>
 </div>
 
-<div id="plazas-content" class="hidden content"></div>
+<div id="plazas-content" class="hidden content">
+</div>
+
+<form id="plaza-form" onsubmit="return false;" class="hidden content">
+    <h2>Add new plaza</h2>
+    <input type="text" name="name">
+    <button onclick="onPlazaAddClicked();">Add</button>
+</form>
 
 <div id ="shops-content" class="hidden content"></div>
 
