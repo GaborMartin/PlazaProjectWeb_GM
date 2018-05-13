@@ -7,6 +7,8 @@ const INTERNAL_SERVER_ERROR = 500;
 let loginContentDivEl;
 let profileContentDivEl;
 let plazasContentDivEl;
+let shopsContentDivEl;
+let plazaFormEl;
 let backToProfileContentDivEl;
 let logoutContentDivEl;
 
@@ -98,6 +100,9 @@ function onLoad() {
     loginContentDivEl = document.getElementById('login-content');
     profileContentDivEl = document.getElementById('profile-content');
     plazasContentDivEl = document.getElementById('plazas-content');
+    shopsContentDivEl = document.getElementById('shops-content');
+    plazaFormEl = document.getElementById('plaza-form');
+
     backToProfileContentDivEl = document.getElementById('back-to-profile-content');
     logoutContentDivEl = document.getElementById('logout-content');
 
