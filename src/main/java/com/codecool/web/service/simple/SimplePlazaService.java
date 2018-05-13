@@ -17,28 +17,51 @@ public class SimplePlazaService implements PlazaService {
     }
 
     @Override
-    public List<Plaza> getAll() throws ServiceException {
-        try {
-            List<Plaza> plazas = plazaDao.getAll();
-            if (plazas.size() == 0) {
-                throw new ServiceException("There's no plaza yet!");
-            }
-            return plazas;
-        } catch (SQLException e) {
-            throw new ServiceException(e.getMessage());
+    public List<Plaza> getAll() throws SQLException, ServiceException {
+        List<Plaza> plazas = plazaDao.getAll();
+        if (plazas.size() == 0) {
+            throw new ServiceException("There's no plaza yet!");
         }
+        return plazas;
     }
 
     @Override
-    public Plaza getPlazaById(int id) throws ServiceException {
+    public Plaza getPlazaById(int id) throws SQLException, ServiceException {
         try {
             Plaza plaza = plazaDao.getPlazaById(id);
             if (plaza == null) {
                 throw new ServiceException("There's no plaza with this ID!");
             }
             return plaza;
-        } catch (SQLException e) {
+        } catch (IllegalArgumentException e) {
             throw new ServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public Plaza addNewPlaza(String name) throws ServiceException, SQLException {
+        try {
+            return plazaDao.addPlaza(name);
+        } catch (IllegalArgumentException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void modifyPlazaById(int id, String name) throws SQLException, ServiceException {
+        try {
+            plazaDao.updatePlazaById(id, name);
+        } catch (IllegalArgumentException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deletePlazaById(int id) throws SQLException, ServiceException {
+        try {
+            plazaDao.deletePlazaById(id);
+        } catch (IllegalArgumentException ex) {
+            throw new ServiceException(ex.getMessage());
         }
     }
 }
